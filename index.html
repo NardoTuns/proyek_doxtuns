@@ -2,51 +2,77 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informasi Sekolah</title>
+  <title>Login Sederhana</title>
   <style>
     body {
+      background-color: #f0f2f5;
       font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .container {
-      background: #fff;
-      padding: 20px;
+
+    .login-container {
+      background: white;
+      padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
     }
-    h1 {
-      color: #2c3e50;
+
+    input[type="password"] {
+      padding: 10px;
+      width: 200px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
-    p {
-      font-size: 18px;
-      color: #34495e;
-    }
-    .button-link {
-      display: inline-block;
-      margin-top: 20px;
+
+    button {
       padding: 10px 20px;
       background-color: #2980b9;
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: 5px;
-      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
     }
-    .button-link:hover {
+
+    button:hover {
       background-color: #1c5980;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>SMP Kristen Basaan</h1>
-    <p>Alamat: Desa Basaan, Kecamatan Ratatotok, Kabupaten Minahasa Tenggara, Sulawesi Utara</p>
-    
-    <a href="utama.html" class="button-link">Kembali ke Halaman Utama</a>
+
+  <div class="login-container">
+    <h2>Masukkan Password</h2>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <br>
+    <button onclick="cekPassword()">Masuk</button>
+    <div class="error" id="errorMsg">Password salah!</div>
   </div>
+
+  <script>
+    function cekPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const errorMsg = document.getElementById("errorMsg");
+      
+      if (password === "123") {
+        window.location.href = "Utama.html";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+  </script>
+
 </body>
 </html>
