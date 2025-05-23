@@ -1,54 +1,146 @@
 <!DOCTYPE html>
 <html lang="id">
-    <body>
-  <div class="container">
-    <h1>SMP Kristen Basaan</h1>
-    <p>Alamat: Desa Basaan, Kecamatan Ratatotok, Kabupaten Minahasa Tenggara, Sulawesi Utara</p>
-    
-    <a href="index.html" class="button-link">Kembali ke muka</a>
-  </div>
-</body>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Animasi Teks Keren</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis IPA Fisika SMP</title>
   <style>
     body {
-      background-color: #0f2027;
-      color: #00ffcc;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      padding: 30px;
     }
 
-    .typing-container {
-      border-right: 3px solid #00ffcc;
-      white-space: nowrap;
-      overflow: hidden;
-      font-size: 28px;
-      width: 0;
-      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+    .container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
     }
 
-    @keyframes blink {
-      50% { border-color: transparent }
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question h3 {
+      margin-bottom: 10px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1c5980;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: green;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Kuis IPA Fisika SMP</h1>
+    
+    <form id="quizForm">
+      <div class="question">
+        <h3>1. Alat untuk mengukur kuat arus listrik adalah ...</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a"> Voltmeter</label>
+          <label><input type="radio" name="q1" value="b"> Amperemeter</label>
+          <label><input type="radio" name="q1" value="c"> Termometer</label>
+          <label><input type="radio" name="q1" value="d"> Barometer</label>
+        </div>
+      </div>
 
-  <div class="typing-container">
-    Selamat datang di SMP Kristen Basaan!
+      <div class="question">
+        <h3>2. Energi yang dimiliki benda karena geraknya disebut ...</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a"> Energi potensial</label>
+          <label><input type="radio" name="q2" value="b"> Energi panas</label>
+          <label><input type="radio" name="q2" value="c"> Energi kinetik</label>
+          <label><input type="radio" name="q2" value="d"> Energi cahaya</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>3. Alat optik yang digunakan untuk melihat benda sangat kecil adalah ...</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a"> Mikroskop</label>
+          <label><input type="radio" name="q3" value="b"> Teleskop</label>
+          <label><input type="radio" name="q3" value="c"> Lup</label>
+          <label><input type="radio" name="q3" value="d"> Periskop</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>4. Satuan energi dalam SI adalah ...</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> Newton</label>
+          <label><input type="radio" name="q4" value="b"> Joule</label>
+          <label><input type="radio" name="q4" value="c"> Watt</label>
+          <label><input type="radio" name="q4" value="d"> Volt</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>5. Gaya gesek terjadi karena ...</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> Adanya listrik statis</label>
+          <label><input type="radio" name="q5" value="b"> Dua benda saling tolak</label>
+          <label><input type="radio" name="q5" value="c"> Permukaan bersentuhan</label>
+          <label><input type="radio" name="q5" value="d"> Medan magnet</label>
+        </div>
+      </div>
+
+      <button type="button" onclick="hitungSkor()">Lihat Skor</button>
+    </form>
+
+    <div id="result"></div>
   </div>
 
-</body>
+  <script>
+    function hitungSkor() {
+      const jawabanBenar = {
+        q1: 'b',
+        q2: 'c',
+        q3: 'a',
+        q4: 'b',
+        q5: 'c'
+      };
 
+      let skor = 0;
+      for (let i = 1; i <= 5; i++) {
+        const soal = document.querySelector(`input[name="q${i}"]:checked`);
+        if (soal && soal.value === jawabanBenar[`q${i}`]) {
+          skor++;
+        }
+      }
+
+      document.getElementById('result').innerText = `Skor Anda: ${skor} dari 5`;
+    }
+  </script>
+</body>
 </html>
