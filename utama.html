@@ -54,16 +54,27 @@
 
     #result {
       margin-top: 20px;
-      font-size: 20px;
+      font-size: 24px;
       color: green;
       text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #timer {
+      font-size: 18px;
+      font-weight: bold;
+      color: #e74c3c;
+      text-align: center;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Kuis IPA Fisika SMP</h1>
-    
+    <div id="timer">Waktu: 60 detik</div>
+
     <form id="quizForm">
       <div class="question">
         <h3>1. Alat untuk mengukur kuat arus listrik adalah ...</h3>
@@ -121,26 +132,51 @@
     <div id="result"></div>
   </div>
 
-  <script>
-    function hitungSkor() {
-      const jawabanBenar = {
-        q1: 'b',
-        q2: 'c',
-        q3: 'a',
-        q4: 'b',
-        q5: 'c'
-      };
+  <!-- Optional sound effects -->
+  <audio id="benar" src="benar.mp3" preload="auto"></audio>
+  <audio id="salah" src="salah.mp3" preload="auto"></audio>
 
+  <script>
+    const jawabanBenar = {
+      q1: 'b',
+      q2: 'c',
+      q3: 'a',
+      q4: 'b',
+      q5: 'c'
+    };
+
+    function hitungSkor() {
       let skor = 0;
+
       for (let i = 1; i <= 5; i++) {
-        const soal = document.querySelector(`input[name="q${i}"]:checked`);
-        if (soal && soal.value === jawabanBenar[`q${i}`]) {
-          skor++;
+        const pilihan = document.querySelector(`input[name="q${i}"]:checked`);
+        if (pilihan) {
+          if (pilihan.value === jawabanBenar[`q${i}`]) {
+            skor++;
+            document.getElementById("benar").play();
+          } else {
+            document.getElementById("salah").play();
+          }
         }
       }
 
-      document.getElementById('result').innerText = `Skor Anda: ${skor} dari 5`;
+      const hasil = document.getElementById("result");
+      hasil.innerText = `Skor Anda: ${skor} dari 5`;
+      hasil.style.opacity = 1;
     }
+
+    // Timer
+    let waktu = 60;
+    const timerDiv = document.getElementById("timer");
+    const countdown = setInterval(() => {
+      waktu--;
+      timerDiv.textContent = `Waktu: ${waktu} detik`;
+      if (waktu <= 0) {
+        clearInterval(countdown);
+        hitungSkor();
+        alert("Waktu habis! Skor telah dihitung otomatis.");
+      }
+    }, 1000);
   </script>
 </body>
 </html>
