@@ -65,10 +65,15 @@
     <input type="password" id="passwordInput" placeholder="Password" />
     <br />
     <button onclick="cekPassword()">Masuk</button>
+    <button onclick="bukaAnimasi()">Lihat Animasi Bola</button>
     <div class="error" id="errorMsg">Password salah!</div>
   </div>
 
   <script>
+    function bukaAnimasi() {
+  window.location.href = "Untitled-2.html";
+}
+
     function cekPassword() {
       const password = document.getElementById("passwordInput").value;
       const errorMsg = document.getElementById("errorMsg");
